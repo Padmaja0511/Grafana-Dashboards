@@ -1,0 +1,30 @@
+name: Deploy Grafana Dashboard
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y jq curl
+
+    - name: Deploy Grafana Dashboard
+      env:
+        GRAFANA_URL: ${{ secrets.GRAFANA_URL }}
+        GRAFANA_API_KEY: ${{ secrets.GRAFANA_API_KEY }}
+      run: |
+        DASHBOARD_JSON=$(cat Grafana-Dashboards/App Performance Data-1716452452388.json)
+        curl -X POST "${GRAFANA_URL}/api/dashboards/db" \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer ${GRAFANA_API_KEY}" \
+          -d "${DASHBOARD_JSON}"
