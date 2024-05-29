@@ -23,4 +23,4 @@ jobs:
         GRAFANA_API_KEY: ${{ secrets.GRAFANA_API_KEY }}
       run: |
         $DASHBOARD_JSON = Get-Content "./App_Performance_Data-1716450378833.json" -Raw
-        Invoke-RestMethod -Uri "${env:GRAFANA_URL}/api/dashboards/db" -Method Post -Headers @{ "Content-Type" = "application/json"; "Authorization" = "Bearer ${env:GRAFANA_API_KEY}" } -Body $DASHBOARD_JSON
+        Invoke-RestMethod -Uri "${secrets.GRAFANA_URL}/api/dashboards/db" -Method Post -Headers @{ "Content-Type" = "application/json"; "Authorization" = "Bearer ${env:GRAFANA_API_KEY}" } -Body $DASHBOARD_JSON
