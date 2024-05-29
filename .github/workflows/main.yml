@@ -23,7 +23,7 @@ jobs:
         GRAFANA_URL: ${{ secrets.GRAFANA_URL }}
         GRAFANA_API_KEY: ${{ secrets.GRAFANA_API_KEY }}
       run: |
-        DASHBOARD_JSON=$(cat Grafana-Dashboards\App Performance Data-1716450378833.json)
+        DASHBOARD_JSON=$(cat Grafana-Dashboards/App Performance Data-1716450378833.json)
         curl -X POST "${GRAFANA_URL}/api/dashboards/db" \
           -H "Content-Type: application/json" \
           -H "Authorization: Bearer ${GRAFANA_API_KEY}" \
