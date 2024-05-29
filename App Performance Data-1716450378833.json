@@ -1,49 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_ELASTICSEARCH-APPLICATIONPERFORMANCEMETRICS",
-      "label": "Elasticsearch-ApplicationPerformanceMetrics",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "elasticsearch",
-      "pluginName": "Elasticsearch"
-    },
-    {
-      "name": "DS_JSON_API-APPPERFORMANCEMETRIC",
-      "label": "JSON API-AppPerformanceMetric",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "marcusolsson-json-datasource",
-      "pluginName": "JSON API"
-    }
-  ],
-  "__elements": {},
-  "__requires": [
-    {
-      "type": "datasource",
-      "id": "elasticsearch",
-      "name": "Elasticsearch",
-      "version": "1.0.0"
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "9.3.2"
-    },
-    {
-      "type": "datasource",
-      "id": "marcusolsson-json-datasource",
-      "name": "JSON API",
-      "version": "1.3.2"
-    },
-    {
-      "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -69,14 +24,14 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
+  "id": 4,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "elasticsearch",
-        "uid": "${DS_ELASTICSEARCH-APPLICATIONPERFORMANCEMETRICS}"
+        "uid": "WvT3mA94k"
       },
       "fieldConfig": {
         "defaults": {
@@ -176,7 +131,7 @@
           "cacheDurationSeconds": 300,
           "datasource": {
             "type": "elasticsearch",
-            "uid": "${DS_ELASTICSEARCH-APPLICATIONPERFORMANCEMETRICS}"
+            "uid": "WvT3mA94k"
           },
           "fields": [
             {
@@ -217,7 +172,7 @@
     {
       "datasource": {
         "type": "marcusolsson-json-datasource",
-        "uid": "${DS_JSON_API-APPPERFORMANCEMETRIC}"
+        "uid": "yQX2WPb4z"
       },
       "fieldConfig": {
         "defaults": {
@@ -326,7 +281,7 @@
           "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
-            "uid": "${DS_JSON_API-APPPERFORMANCEMETRIC}"
+            "uid": "yQX2WPb4z"
           },
           "fields": [
             {
@@ -366,7 +321,7 @@
     {
       "datasource": {
         "type": "elasticsearch",
-        "uid": "${DS_ELASTICSEARCH-APPLICATIONPERFORMANCEMETRICS}"
+        "uid": "WvT3mA94k"
       },
       "fieldConfig": {
         "defaults": {
@@ -485,7 +440,160 @@
           ],
           "datasource": {
             "type": "elasticsearch",
-            "uid": "${DS_ELASTICSEARCH-APPLICATIONPERFORMANCEMETRICS}"
+            "uid": "WvT3mA94k"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "",
+          "refId": "A",
+          "timeField": "Timestamp"
+        }
+      ],
+      "title": "Server Response Time of ${app} (ms)",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "value": "Server Response TIme (in ms)",
+              "value A": "Good",
+              "value B": "Okay",
+              "value C": "Poor"
+            }
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "WvT3mA94k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 5,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Page fetch time"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Page fetch time (in ms)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 10
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "Timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "WvT3mA94k"
           },
           "metrics": [
             {
@@ -524,10 +632,14 @@
   "templating": {
     "list": [
       {
-        "current": {},
+        "current": {
+          "selected": false,
+          "text": "Citrix Cloud",
+          "value": "Citrix Cloud"
+        },
         "datasource": {
           "type": "marcusolsson-json-datasource",
-          "uid": "${DS_JSON_API-APPPERFORMANCEMETRIC}"
+          "uid": "yQX2WPb4z"
         },
         "definition": "$.hits.hits[*]._source.AppName",
         "hide": 0,
@@ -554,10 +666,14 @@
         "type": "query"
       },
       {
-        "current": {},
+        "current": {
+          "selected": false,
+          "text": "Roaming Users",
+          "value": "Roaming Users"
+        },
         "datasource": {
           "type": "marcusolsson-json-datasource",
-          "uid": "${DS_JSON_API-APPPERFORMANCEMETRIC}"
+          "uid": "yQX2WPb4z"
         },
         "definition": "$.hits.hits[*]._source.ZsLocation",
         "hide": 0,
